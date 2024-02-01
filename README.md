@@ -31,8 +31,8 @@ Please note that the API specified below may change without notice before reachi
 ```typescript
 toShp: (
 	geojson: FeatureCollection,
-	type: ShapefileTypesString,
-	userOptions?: Partial<Options>
+	type: "Null Shape" | "Point" | "PolyLine" | "Polygon" | "MultiPoint" | "PointZ" | "PolyLineZ" | "PolygonZ" | "MultiPointZ" | "PointM" | "PolyLineM" | "PolygonM" | "MultiPointM" | "MultiPatch",
+    userOptions?: Partial<Options>
 ) => {
   shp: Dataview,
   shx: Dataview,
