@@ -27,5 +27,8 @@
     "typescript": "^5.2.2",
     "vitest": "^0.34.6"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@types/geojson": "^7946.0.13",
+    "dbf": "^0.2.0"
+  }
 }
