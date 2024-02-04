@@ -13,7 +13,7 @@ const defaultOptions = {
 };
 
 const toShp = (geojson: FeatureCollection, type: ShapefileTypesString, userOptions?: Partial<Options>) => {
-  const options = { ...defaultOptions, userOptions };
+  const options = { ...defaultOptions, ...userOptions };
   const numType = shapefileTypeToNumberType(type);
   if (!numType) throw new Error("Invalid shapefile type");
 
