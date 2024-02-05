@@ -87,6 +87,103 @@ const write = (
       featureByteIndex += 16;
     });
 
+    // PolyLineM start
+    if (shapefileNumberTypeToStringType(shpTypeNumber) === "PolyLineM") {
+      shpView.setFloat64(currByteIndex + featureByteIndex + 0, bb.mmin || 0, true);
+      shpView.setFloat64(currByteIndex + featureByteIndex + 8, bb.mmax || 0, true);
+
+      featureByteIndex += 16;
+
+      if (o.FeatureMPropertyKey) {
+        let mValue = feature.properties?.[o.featureElevationPropertyKey as string];
+        if (typeof mValue === "string" && isFinite(mValue as any)) mValue = Number(mValue);
+
+        if (typeof mValue === "number") {
+          points.forEach((_) => {
+            shpView.setFloat64(currByteIndex + featureByteIndex, mValue, true);
+            featureByteIndex += 8;
+          });
+        }
+
+        if (Array.isArray(mValue)) {
+          //flatten in case we're dealing with a MultiLineString and values come in an parts array for each line segment
+          mValue = mValue.reduce((list, val) => [...list, ...(Array.isArray(val) ? [...val] : [val])], [] as number[]);
+          points.forEach((_, i) => {
+            let val = mValue[i];
+            if (typeof val === "string" && isFinite(val as any)) val = Number(val);
+            if (typeof val === "number") shpView.setFloat64(currByteIndex + featureByteIndex, val, true);
+            featureByteIndex += 8;
+          });
+        }
+      }
+    }
+    // PolyLineM end
+
+    // PolyLineZ start
+    if (shapefileNumberTypeToStringType(shpTypeNumber) === "PolyLineZ") {
+      shpView.setFloat64(currByteIndex + featureByteIndex + 0, bb.zmin || 0, true);
+      shpView.setFloat64(currByteIndex + featureByteIndex + 8, bb.zmax || 0, true);
+
+      featureByteIndex += 16;
+
+      if (o.featureElevationPropertyKey) {
+        let zValue = feature.properties?.[o.featureElevationPropertyKey as string];
+        if (typeof zValue === "string" && isFinite(zValue as any)) zValue = Number(zValue);
+
+        if (typeof zValue === "number") {
+          points.forEach((_) => {
+            shpView.setFloat64(currByteIndex + featureByteIndex, zValue, true);
+            featureByteIndex += 8;
+          });
+        }
+
+        if (Array.isArray(zValue)) {
+          //flatten in case we're dealing with a MultiLineString and values come in an parts array for each line segment
+          zValue = zValue.reduce((list, val) => [...list, ...(Array.isArray(val) ? [...val] : [val])], [] as number[]);
+          points.forEach((_, i) => {
+            let val = zValue[i];
+            if (typeof val === "string" && isFinite(val as any)) val = Number(val);
+            if (typeof val === "number") shpView.setFloat64(currByteIndex + featureByteIndex, val, true);
+            featureByteIndex += 8;
+          });
+        }
+      } else if (o.parseElevationFromThirdElementInFeaturesCoordinateArray) {
+        points.forEach((point) => {
+          shpView.setFloat64(currByteIndex + featureByteIndex, point[2] || 0, true);
+          featureByteIndex += 8;
+        });
+      }
+
+      shpView.setFloat64(currByteIndex + featureByteIndex + 0, bb.mmin || 0, true);
+      shpView.setFloat64(currByteIndex + featureByteIndex + 8, bb.mmax || 0, true);
+
+      featureByteIndex += 16;
+
+      if (o.FeatureMPropertyKey) {
+        let mValue = feature.properties?.[o.featureElevationPropertyKey as string];
+        if (typeof mValue === "string" && isFinite(mValue as any)) mValue = Number(mValue);
+
+        if (typeof mValue === "number") {
+          points.forEach((_) => {
+            shpView.setFloat64(currByteIndex + featureByteIndex, mValue, true);
+            featureByteIndex += 8;
+          });
+        }
+
+        if (Array.isArray(mValue)) {
+          //flatten in case we're dealing with a MultiLineString and values come in an parts array for each line segment
+          mValue = mValue.reduce((list, val) => [...list, ...(Array.isArray(val) ? [...val] : [val])], [] as number[]);
+          points.forEach((_, i) => {
+            let val = mValue[i];
+            if (typeof val === "string" && isFinite(val as any)) val = Number(val);
+            if (typeof val === "number") shpView.setFloat64(currByteIndex + featureByteIndex, val, true);
+            featureByteIndex += 8;
+          });
+        }
+      }
+    }
+    // PolyLineZ end
+
     // Record header
     shpView.setInt32(currByteIndex, index + 1); // Record number
     shpView.setInt32(currByteIndex + 4, (featureByteIndex - 8) / 2); // Record length

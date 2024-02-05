@@ -7,7 +7,7 @@ import { structure } from "dbf";
 const defaultOptions = {
   bundlePolygonsWithLineStrings: true,
   bundleMultiTypesWithBasic: true,
-  parseElevationFromThirdElementInFeaturesCoordinateArray: false,
+  parseElevationFromThirdElementInFeaturesCoordinateArray: true,
   featureElevationPropertyKey: null as null | string,
   FeatureMPropertyKey: null as null | string,
 };

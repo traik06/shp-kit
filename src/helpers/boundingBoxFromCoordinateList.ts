@@ -63,6 +63,12 @@ const boundingBoxFromFeaturesList = (
     }
   });
 
+  if (bb.mmin === Infinity) bb.mmin = 0;
+  if (bb.mmax === -Infinity) bb.mmax = 0;
+
+  if (bb.zmin === Infinity) bb.zmin = 0;
+  if (bb.zmax === -Infinity) bb.zmax = 0;
+
   return bb;
 };
 
