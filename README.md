@@ -66,7 +66,7 @@ shpRead: (
 
 This function is still under development and will be implemented in the future.
 
-### shpRead
+### reprojectGeoJson
 
 ```typescript
 reprojectGeoJson: (
