@@ -1,6 +1,6 @@
 import { Feature, FeatureCollection, GeoJsonProperties, Geometry } from "geojson";
 import { ShapefileTypesNumber, shapefileNumberTypeToStringType } from "../helpers/shapefileTypes";
-import { Options } from "../public/toShp";
+import { Options } from "../public/shpWrite";
 import boundingBoxFromFeaturesList from "../helpers/boundingBoxFromCoordinateList";
 import flattenGeojsonFeatureListToSimpleCoordinateList from "../helpers/flattenGeojsonFeatureCoordinates";
 import extractFeatureParts from "../helpers/extractFeatureParts";

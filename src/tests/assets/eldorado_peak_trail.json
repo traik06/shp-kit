@@ -5,6 +5,7 @@
             "type": "Feature",
             "properties": {
                 "singleNumericValueForTesting": 138,
+                "singleNumericDecimalValueForTesting": 381.123971,
                 "singleStringValueForTesting": "Hello world!",
                 "station": [
                     0,

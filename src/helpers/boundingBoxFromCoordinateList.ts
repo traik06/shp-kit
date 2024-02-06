@@ -1,5 +1,5 @@
 import { Feature, GeoJsonProperties, Geometry } from "geojson";
-import { Options } from "../public/toShp";
+import { Options } from "../public/shpWrite";
 import flattenGeojsonFeatureListToSimpleCoordinateList from "./flattenGeojsonFeatureCoordinates";
 import { ShapefileTypesNumber, shapefileNumberTypeToStringType } from "./shapefileTypes";
 
