@@ -1,5 +1,11 @@
 # shp-kit
 
+## 0.1.2
+
+### Patch Changes
+
+- 8eca080: Added PolyLine shpReader (doesn't support PolyLineZ or PolyLineM yet)
+
 ## 0.1.1
 
 ### Patch Changes
