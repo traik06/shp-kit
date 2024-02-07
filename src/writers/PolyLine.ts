@@ -94,14 +94,15 @@ const write = (
 
       featureByteIndex += 16;
 
+      let mPropOffset = 0;
       if (o.FeatureMPropertyKey) {
         let mValue = feature.properties?.[o.featureElevationPropertyKey as string];
         if (typeof mValue === "string" && isFinite(mValue as any)) mValue = Number(mValue);
 
         if (typeof mValue === "number") {
           points.forEach((_) => {
-            shpView.setFloat64(currByteIndex + featureByteIndex, mValue, true);
-            featureByteIndex += 8;
+            shpView.setFloat64(currByteIndex + featureByteIndex + mPropOffset, mValue, true);
+            mPropOffset += 8;
           });
         }
 
@@ -111,11 +112,12 @@ const write = (
           points.forEach((_, i) => {
             let val = mValue[i];
             if (typeof val === "string" && isFinite(val as any)) val = Number(val);
-            if (typeof val === "number") shpView.setFloat64(currByteIndex + featureByteIndex, val, true);
-            featureByteIndex += 8;
+            if (typeof val === "number") shpView.setFloat64(currByteIndex + featureByteIndex + mPropOffset, val, true);
+            mPropOffset += 8;
           });
         }
       }
+      featureByteIndex += points.length * 8;
     }
     // PolyLineM end
 
@@ -126,14 +128,15 @@ const write = (
 
       featureByteIndex += 16;
 
+      let zPropOffset = 0;
       if (o.featureElevationPropertyKey) {
         let zValue = feature.properties?.[o.featureElevationPropertyKey as string];
         if (typeof zValue === "string" && isFinite(zValue as any)) zValue = Number(zValue);
 
         if (typeof zValue === "number") {
           points.forEach((_) => {
-            shpView.setFloat64(currByteIndex + featureByteIndex, zValue, true);
-            featureByteIndex += 8;
+            shpView.setFloat64(currByteIndex + featureByteIndex + zPropOffset, zValue, true);
+            zPropOffset += 8;
           });
         }
 
@@ -143,30 +146,32 @@ const write = (
           points.forEach((_, i) => {
             let val = zValue[i];
             if (typeof val === "string" && isFinite(val as any)) val = Number(val);
-            if (typeof val === "number") shpView.setFloat64(currByteIndex + featureByteIndex, val, true);
-            featureByteIndex += 8;
+            if (typeof val === "number") shpView.setFloat64(currByteIndex + featureByteIndex + zPropOffset, val, true);
+            zPropOffset += 8;
           });
         }
       } else if (o.parseElevationFromThirdElementInFeaturesCoordinateArray) {
         points.forEach((point) => {
-          shpView.setFloat64(currByteIndex + featureByteIndex, point[2] || 0, true);
-          featureByteIndex += 8;
+          shpView.setFloat64(currByteIndex + featureByteIndex + zPropOffset, point[2] || 0, true);
+          zPropOffset += 8;
         });
       }
+      featureByteIndex += points.length * 8;
 
       shpView.setFloat64(currByteIndex + featureByteIndex + 0, bb.mmin || 0, true);
       shpView.setFloat64(currByteIndex + featureByteIndex + 8, bb.mmax || 0, true);
 
       featureByteIndex += 16;
 
+      let mPropOffset = 0;
       if (o.FeatureMPropertyKey) {
         let mValue = feature.properties?.[o.featureElevationPropertyKey as string];
         if (typeof mValue === "string" && isFinite(mValue as any)) mValue = Number(mValue);
 
         if (typeof mValue === "number") {
           points.forEach((_) => {
-            shpView.setFloat64(currByteIndex + featureByteIndex, mValue, true);
-            featureByteIndex += 8;
+            shpView.setFloat64(currByteIndex + featureByteIndex + mPropOffset, mValue, true);
+            mPropOffset += 8;
           });
         }
 
@@ -176,11 +181,12 @@ const write = (
           points.forEach((_, i) => {
             let val = mValue[i];
             if (typeof val === "string" && isFinite(val as any)) val = Number(val);
-            if (typeof val === "number") shpView.setFloat64(currByteIndex + featureByteIndex, val, true);
-            featureByteIndex += 8;
+            if (typeof val === "number") shpView.setFloat64(currByteIndex + featureByteIndex + mPropOffset, val, true);
+            mPropOffset += 8;
           });
         }
       }
+      featureByteIndex += points.length * 8;
     }
     // PolyLineZ end
 

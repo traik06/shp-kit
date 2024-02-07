@@ -50,13 +50,13 @@ const shpWrite = async (geojson: FeatureCollection, type: ShapefileTypesString, 
   shp.setFloat64(60, bb.ymax, true);
 
   if (typeof bb.zmin == "number" && typeof bb.zmax == "number") {
-    shp.setInt32(68, bb.zmin, true);
-    shp.setInt32(76, bb.zmax, true);
+    shp.setFloat64(68, bb.zmin, true);
+    shp.setFloat64(76, bb.zmax, true);
   }
 
   if (typeof bb.mmin == "number" && typeof bb.mmax == "number") {
-    shp.setInt32(84, bb.mmin, true);
-    shp.setInt32(92, bb.mmax, true);
+    shp.setFloat64(84, bb.mmin, true);
+    shp.setFloat64(92, bb.mmax, true);
   }
 
   //Duplicate header to Shx (headers are identical)

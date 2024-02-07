@@ -12,18 +12,21 @@ const buffEqal = (buf1: ArrayBuffer, buf2: ArrayBuffer, ignoreByteIndexes: numbe
   }
   return true;
 };
-describe("toShp", () => {
+describe("shpWrite", () => {
   it("PolyLineZ.001 - LineString, default options", async () => {
     const geojson = JSON.parse(
       fs.readFileSync(path.join(__dirname, "assets", "eldorado_peak_trail.json"), { encoding: "UTF-8" })
     );
-    const shpBuffer = fs.readFileSync(path.join(__dirname, "test_results", "PolyLineZ", "001-PolyLineZ.shp"));
-    const shxBuffer = fs.readFileSync(path.join(__dirname, "test_results", "PolyLineZ", "001-PolyLineZ.shx"));
-    const dbfBuffer = fs.readFileSync(path.join(__dirname, "test_results", "PolyLineZ", "001-PolyLineZ.dbf"));
+    const shpBuffer = fs.readFileSync(path.join(__dirname, "test_results", "write", "PolyLineZ", "001-PolyLineZ.shp"));
+    const shxBuffer = fs.readFileSync(path.join(__dirname, "test_results", "write", "PolyLineZ", "001-PolyLineZ.shx"));
+    const dbfBuffer = fs.readFileSync(path.join(__dirname, "test_results", "write", "PolyLineZ", "001-PolyLineZ.dbf"));
 
     const { shp, shx, dbf } = await shpWrite(geojson, "PolyLineZ", {
       parseElevationFromThirdElementInFeaturesCoordinateArray: true,
     });
+    // fs.writeFile(path.join(__dirname, "output", "001-PolyLineZ.shp"), shp, () => {});
+    // fs.writeFile(path.join(__dirname, "output", "001-PolyLineZ.shx"), shx, () => {});
+    // fs.writeFile(path.join(__dirname, "output", "001-PolyLineZ.dbf"), dbf, () => {});
 
     expect(buffEqal(shpBuffer, shp.buffer)).toBe(true);
     expect(buffEqal(shxBuffer, shx.buffer)).toBe(true);
@@ -34,13 +37,16 @@ describe("toShp", () => {
     const geojson = JSON.parse(
       fs.readFileSync(path.join(__dirname, "assets", "mount_shasta_trails_multiLineString.json"), { encoding: "UTF-8" })
     );
-    const shpBuffer = fs.readFileSync(path.join(__dirname, "test_results", "PolyLineZ", "002-PolyLineZ.shp"));
-    const shxBuffer = fs.readFileSync(path.join(__dirname, "test_results", "PolyLineZ", "002-PolyLineZ.shx"));
-    const dbfBuffer = fs.readFileSync(path.join(__dirname, "test_results", "PolyLineZ", "002-PolyLineZ.dbf"));
+    const shpBuffer = fs.readFileSync(path.join(__dirname, "test_results", "write", "PolyLineZ", "002-PolyLineZ.shp"));
+    const shxBuffer = fs.readFileSync(path.join(__dirname, "test_results", "write", "PolyLineZ", "002-PolyLineZ.shx"));
+    const dbfBuffer = fs.readFileSync(path.join(__dirname, "test_results", "write", "PolyLineZ", "002-PolyLineZ.dbf"));
 
     const { shp, shx, dbf } = await shpWrite(geojson, "PolyLineZ", {
       parseElevationFromThirdElementInFeaturesCoordinateArray: true,
     });
+    // fs.writeFile(path.join(__dirname, "output", "002-PolyLineZ.shp"), shp, () => {});
+    // fs.writeFile(path.join(__dirname, "output", "002-PolyLineZ.shx"), shx, () => {});
+    // fs.writeFile(path.join(__dirname, "output", "002-PolyLineZ.dbf"), dbf, () => {});
 
     expect(buffEqal(shpBuffer, shp.buffer)).toBe(true);
     expect(buffEqal(shxBuffer, shx.buffer)).toBe(true);
@@ -51,13 +57,16 @@ describe("toShp", () => {
     const geojson = JSON.parse(
       fs.readFileSync(path.join(__dirname, "assets", "mount_shasta_trails_multiLineString.json"), { encoding: "UTF-8" })
     );
-    const shpBuffer = fs.readFileSync(path.join(__dirname, "test_results", "PolyLineZ", "003-PolyLineZ.shp"));
-    const shxBuffer = fs.readFileSync(path.join(__dirname, "test_results", "PolyLineZ", "003-PolyLineZ.shx"));
-    const dbfBuffer = fs.readFileSync(path.join(__dirname, "test_results", "PolyLineZ", "003-PolyLineZ.dbf"));
+    const shpBuffer = fs.readFileSync(path.join(__dirname, "test_results", "write", "PolyLineZ", "003-PolyLineZ.shp"));
+    const shxBuffer = fs.readFileSync(path.join(__dirname, "test_results", "write", "PolyLineZ", "003-PolyLineZ.shx"));
+    const dbfBuffer = fs.readFileSync(path.join(__dirname, "test_results", "write", "PolyLineZ", "003-PolyLineZ.dbf"));
 
     const { shp, shx, dbf } = await shpWrite(geojson, "PolyLineZ", {
       featureElevationPropertyKey: "singularNumberForTest",
     });
+    // fs.writeFile(path.join(__dirname, "output", "003-PolyLineZ.shp"), shp, () => {});
+    // fs.writeFile(path.join(__dirname, "output", "003-PolyLineZ.shx"), shx, () => {});
+    // fs.writeFile(path.join(__dirname, "output", "003-PolyLineZ.dbf"), dbf, () => {});
 
     expect(buffEqal(shpBuffer, shp.buffer)).toBe(true);
     expect(buffEqal(shxBuffer, shx.buffer)).toBe(true);
@@ -68,13 +77,16 @@ describe("toShp", () => {
     const geojson = JSON.parse(
       fs.readFileSync(path.join(__dirname, "assets", "mount_shasta_trails_multiLineString.json"), { encoding: "UTF-8" })
     );
-    const shpBuffer = fs.readFileSync(path.join(__dirname, "test_results", "PolyLineZ", "004-PolyLineZ.shp"));
-    const shxBuffer = fs.readFileSync(path.join(__dirname, "test_results", "PolyLineZ", "004-PolyLineZ.shx"));
-    const dbfBuffer = fs.readFileSync(path.join(__dirname, "test_results", "PolyLineZ", "004-PolyLineZ.dbf"));
+    const shpBuffer = fs.readFileSync(path.join(__dirname, "test_results", "write", "PolyLineZ", "004-PolyLineZ.shp"));
+    const shxBuffer = fs.readFileSync(path.join(__dirname, "test_results", "write", "PolyLineZ", "004-PolyLineZ.shx"));
+    const dbfBuffer = fs.readFileSync(path.join(__dirname, "test_results", "write", "PolyLineZ", "004-PolyLineZ.dbf"));
 
     const { shp, shx, dbf } = await shpWrite(geojson, "PolyLineZ", {
       featureElevationPropertyKey: "elevationAsProperty",
     });
+    // fs.writeFile(path.join(__dirname, "output", "004-PolyLineZ.shp"), shp, () => {});
+    // fs.writeFile(path.join(__dirname, "output", "004-PolyLineZ.shx"), shx, () => {});
+    // fs.writeFile(path.join(__dirname, "output", "004-PolyLineZ.dbf"), dbf, () => {});
 
     expect(buffEqal(shpBuffer, shp.buffer)).toBe(true);
     expect(buffEqal(shxBuffer, shx.buffer)).toBe(true);
