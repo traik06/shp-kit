@@ -1,5 +1,11 @@
 # shp-kit
 
+## 0.1.3
+
+### Patch Changes
+
+- e05bd98: Updated readme to reflect correctly current support set
+
 ## 0.1.2
 
 ### Patch Changes
