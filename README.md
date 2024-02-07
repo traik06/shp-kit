@@ -1,4 +1,4 @@
-# shp-kit
+![SHP-KIT Logo](.github/logo.png)
 
 **shp-kit** is a JavaScript library under development, providing functionality to read and write shapefiles from GeoJSON. The library focuses on simplifying the conversion process between GeoJSON and shapefiles, making it easier for developers to work with spatial data.
 
