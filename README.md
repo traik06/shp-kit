@@ -9,7 +9,7 @@ The following table outlines the current support for different types of shapefil
 | Shapefile Type | Read | Write |
 | -------------- | ---- | ----- |
 | Point          | ❌   | ❌    |
-| PolyLine       | ❌   | ✅    |
+| PolyLine       | ✅   | ✅    |
 | Polygon        | ❌   | ❌    |
 | MultiPoint     | ❌   | ❌    |
 | PointZ         | ❌   | ❌    |
