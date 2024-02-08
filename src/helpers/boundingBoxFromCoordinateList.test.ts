@@ -10,7 +10,7 @@ describe("boundingBoxFromFeaturesList", () => {
     ];
 
     const shpTypeNumber = 1;
-    const options = { parseElevationFromThirdElementInFeaturesCoordinateArray: true };
+    const options = {};
 
     const result = boundingBoxFromFeaturesList(features as any, shpTypeNumber, options);
 
@@ -30,7 +30,7 @@ describe("boundingBoxFromFeaturesList", () => {
     ];
 
     const shpTypeNumber = 11; // Assuming Point type with elevation PointZ
-    const options = { parseElevationFromThirdElementInFeaturesCoordinateArray: true };
+    const options = {};
 
     const result = boundingBoxFromFeaturesList(features as any, shpTypeNumber, options);
 
