@@ -1,5 +1,11 @@
 # shp-kit
 
+## 0.1.4
+
+### Patch Changes
+
+- ef17186: shpRead now reads PolyLineZ and PolylineMs, API change!
+
 ## 0.1.3
 
 ### Patch Changes
