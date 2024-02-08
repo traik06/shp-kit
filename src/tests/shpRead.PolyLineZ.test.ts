@@ -1,0 +1,27 @@
+import { describe, expect, it } from "vitest";
+import * as fs from "fs";
+import * as path from "path";
+import { shpRead } from "..";
+
+describe("shpRead", () => {
+  it("PolyLineZ.001 - Simple 3D arrow with properties", async () => {
+    const targetGeoJson = fs.readFileSync(
+      path.join(__dirname, "test_results", "read", "PolyLineZ", "001-PolyLineZ.json"),
+      {
+        encoding: "UTF-8",
+      }
+    );
+
+    const shpBuffer = fs.readFileSync(
+      path.join(__dirname, "assets", "statue_of_liberty_arrow_polylineZ", "ARR-3D.shp")
+    );
+    const dbfBuffer = fs.readFileSync(
+      path.join(__dirname, "assets", "statue_of_liberty_arrow_polylineZ", "ARR-3D.dbf")
+    );
+
+    const geojson = await shpRead(shpBuffer, {}, dbfBuffer);
+    console.dir(geojson, { depth: 100 });
+    expect(JSON.stringify(geojson)).toBe(targetGeoJson);
+    // fs.writeFile(path.join(__dirname, "output", "001-PolyLineZ.json"), JSON.stringify(geojson), () => {});
+  });
+});

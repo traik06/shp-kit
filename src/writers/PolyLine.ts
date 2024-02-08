@@ -12,9 +12,9 @@ const filterFeatures = (geojson: FeatureCollection, o: Options) => {
   const features = breakGeometryCollectionsFromFeatureList(geojson.features).filter((f) => {
     return (
       f.geometry.type === "LineString" ||
-      (o.bundlePolygonsWithLineStrings && f.geometry.type === "Polygon") ||
-      (o.bundleMultiTypesWithBasic && f.geometry.type === "MultiLineString") ||
-      (o.bundleMultiTypesWithBasic && o.bundlePolygonsWithLineStrings && f.geometry.type === "MultiPolygon")
+      (o.bundlePolygons && f.geometry.type === "Polygon") ||
+      (o.bundleMultiTypes && f.geometry.type === "MultiLineString") ||
+      (o.bundleMultiTypes && o.bundlePolygons && f.geometry.type === "MultiPolygon")
     );
   });
   return features as Feature<Geometry, GeoJsonProperties>[];
@@ -95,8 +95,8 @@ const write = (
       featureByteIndex += 16;
 
       let mPropOffset = 0;
-      if (o.FeatureMPropertyKey) {
-        let mValue = feature.properties?.[o.featureElevationPropertyKey as string];
+      if (o.measurePropertyKey) {
+        let mValue = feature.properties?.[o.elevationPropertyKey as string];
         if (typeof mValue === "string" && isFinite(mValue as any)) mValue = Number(mValue);
 
         if (typeof mValue === "number") {
@@ -129,8 +129,8 @@ const write = (
       featureByteIndex += 16;
 
       let zPropOffset = 0;
-      if (o.featureElevationPropertyKey) {
-        let zValue = feature.properties?.[o.featureElevationPropertyKey as string];
+      if (o.elevationPropertyKey) {
+        let zValue = feature.properties?.[o.elevationPropertyKey as string];
         if (typeof zValue === "string" && isFinite(zValue as any)) zValue = Number(zValue);
 
         if (typeof zValue === "number") {
@@ -150,7 +150,7 @@ const write = (
             zPropOffset += 8;
           });
         }
-      } else if (o.parseElevationFromThirdElementInFeaturesCoordinateArray) {
+      } else {
         points.forEach((point) => {
           shpView.setFloat64(currByteIndex + featureByteIndex + zPropOffset, point[2] || 0, true);
           zPropOffset += 8;
@@ -164,8 +164,8 @@ const write = (
       featureByteIndex += 16;
 
       let mPropOffset = 0;
-      if (o.FeatureMPropertyKey) {
-        let mValue = feature.properties?.[o.featureElevationPropertyKey as string];
+      if (o.measurePropertyKey) {
+        let mValue = feature.properties?.[o.elevationPropertyKey as string];
         if (typeof mValue === "string" && isFinite(mValue as any)) mValue = Number(mValue);
 
         if (typeof mValue === "number") {

@@ -5,9 +5,12 @@ import { shpRead } from "..";
 
 describe("shpRead", () => {
   it("PolyLine.001 - World boundaries", async () => {
-    const targetGeoJson = fs.readFileSync(path.join(__dirname, "test_results", "read", "001-PolyLine.json"), {
-      encoding: "UTF-8",
-    });
+    const targetGeoJson = fs.readFileSync(
+      path.join(__dirname, "test_results", "read", "PolyLine", "001-PolyLine.json"),
+      {
+        encoding: "UTF-8",
+      }
+    );
 
     const shpBuffer = fs.readFileSync(
       path.join(__dirname, "assets", "ne_10m_admin_0_boundary_lines_land", "ne_10m_admin_0_boundary_lines_land.shp")
@@ -22,9 +25,12 @@ describe("shpRead", () => {
   });
 
   it("PolyLine.002 - World boundaries with properties data", async () => {
-    const targetGeoJson = fs.readFileSync(path.join(__dirname, "test_results", "read", "002-PolyLine.json"), {
-      encoding: "UTF-8",
-    });
+    const targetGeoJson = fs.readFileSync(
+      path.join(__dirname, "test_results", "read", "PolyLine", "002-PolyLine.json"),
+      {
+        encoding: "UTF-8",
+      }
+    );
     const shpBuffer = fs.readFileSync(
       path.join(__dirname, "assets", "ne_10m_admin_0_boundary_lines_land", "ne_10m_admin_0_boundary_lines_land.shp")
     );

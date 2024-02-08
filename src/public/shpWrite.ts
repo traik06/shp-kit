@@ -4,11 +4,10 @@ import { ShapefileTypesString, shapefileTypeToNumberType } from "../helpers/shap
 import writers, { dbf as dbfWrite } from "../writers";
 
 const defaultOptions = {
-  bundlePolygonsWithLineStrings: true,
-  bundleMultiTypesWithBasic: true,
-  parseElevationFromThirdElementInFeaturesCoordinateArray: true,
-  featureElevationPropertyKey: null as null | string,
-  FeatureMPropertyKey: null as null | string,
+  bundlePolygons: true,
+  bundleMultiTypes: true,
+  elevationPropertyKey: null as null | string,
+  measurePropertyKey: null as null | string,
 };
 
 /**

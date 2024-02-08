@@ -33,7 +33,7 @@ describe("shpWrite", () => {
     const dbfBuffer = fs.readFileSync(path.join(__dirname, "test_results", "write", "PolyLine", "002-PolyLine.dbf"));
 
     const { shp, shx, dbf } = await shpWrite(geojson, "PolyLine", {
-      bundleMultiTypesWithBasic: false,
+      bundleMultiTypes: false,
     });
 
     expect(buffEqal(shpBuffer, shp.buffer)).toBe(true);
@@ -48,7 +48,7 @@ describe("shpWrite", () => {
     const dbfBuffer = fs.readFileSync(path.join(__dirname, "test_results", "write", "PolyLine", "003-PolyLine.dbf"));
 
     const { shp, shx, dbf } = await shpWrite(geojson, "PolyLine", {
-      bundlePolygonsWithLineStrings: false,
+      bundlePolygons: false,
     });
 
     expect(buffEqal(shpBuffer, shp.buffer)).toBe(true);
@@ -63,8 +63,8 @@ describe("shpWrite", () => {
     const dbfBuffer = fs.readFileSync(path.join(__dirname, "test_results", "write", "PolyLine", "004-PolyLine.dbf"));
 
     const { shp, shx, dbf } = await shpWrite(geojson, "PolyLine", {
-      bundleMultiTypesWithBasic: false,
-      bundlePolygonsWithLineStrings: false,
+      bundleMultiTypes: false,
+      bundlePolygons: false,
     });
 
     expect(buffEqal(shpBuffer, shp.buffer)).toBe(true);
@@ -79,8 +79,8 @@ describe("shpWrite", () => {
     const dbfBuffer = fs.readFileSync(path.join(__dirname, "test_results", "write", "PolyLine", "001-PolyLine.dbf"));
 
     const { shp, shx, dbf } = await shpWrite(geojson, "PolyLine", {
-      featureElevationPropertyKey: "random", // non-existant
-      FeatureMPropertyKey: "letter", // string instead of expected number | number[]
+      elevationPropertyKey: "random", // non-existant
+      measurePropertyKey: "letter", // string instead of expected number | number[]
     });
 
     expect(buffEqal(shpBuffer, shp.buffer)).toBe(true);

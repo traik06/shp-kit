@@ -4,9 +4,10 @@ import toDataView from "../helpers/toDataView";
 import readers, { dbf as dbfReader } from "../readers";
 import { ShapefileTypesNumber, shapefileNumberTypeToStringType } from "../helpers/shapefileTypes";
 
-const defaultOptions = {};
-
-type Options = typeof defaultOptions;
+const defaultOptions = {
+  elevationPropertyKey: null as string | null,
+  measurePropertyKey: null as string | null,
+};
 
 /**
  *
@@ -18,10 +19,11 @@ type Options = typeof defaultOptions;
  */
 const shpRead = async (
   shp: File | Blob | ArrayBuffer | Buffer,
-  options: Partial<Options>,
+  options?: Partial<Options>,
   dbf?: File | Blob | ArrayBuffer | Buffer,
   prj?: File | Blob | ArrayBuffer | Buffer | string
 ) => {
+  const o = { ...defaultOptions, ...(options ? { options } : {}) };
   const shpView = await toDataView(shp);
   const prjView = prj && typeof prj !== "string" ? await toDataView(prj) : null;
 
@@ -38,7 +40,7 @@ const shpRead = async (
 
   const shpNumType = shpView.getInt32(32, true) as ShapefileTypesNumber;
   //   const shpType = shapefileNumberTypeToStringType(shpNumType);
-
+  o;
   let currByteIndex = 100;
   let currFeatureIndex = 0;
 
@@ -60,6 +62,7 @@ const shpRead = async (
 
     const feature = reader(
       shpView,
+      o,
       currByteIndex + 8,
       recordLength,
       shapefileNumberTypeToStringType(recordNumType),
@@ -73,4 +76,5 @@ const shpRead = async (
   return output;
 };
 
+export type Options = typeof defaultOptions;
 export default shpRead;
