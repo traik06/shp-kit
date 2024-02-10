@@ -39,7 +39,7 @@ const boundingBoxFromFeaturesList = (
     bb.xmax = Math.max(c[0], bb.xmax);
     bb.ymin = Math.min(c[1], bb.ymin);
     bb.ymax = Math.max(c[1], bb.ymax);
-    if (typeof c[2] === "number" && !o.elevationPropertyKey) {
+    if (typeof c[2] === "number" && !o.elevationPropertyKey && type[type.length - 1] === "Z") {
       bb.zmax = Math.max(c[2], bb.zmax || -Infinity);
       bb.zmin = Math.min(c[2], bb.zmin || Infinity);
     }
@@ -47,14 +47,14 @@ const boundingBoxFromFeaturesList = (
 
   let z, m;
   features.forEach((f) => {
-    if (o.elevationPropertyKey) {
+    if (o.elevationPropertyKey && (type[type.length - 1] === "Z" || type[type.length - 1] === "M")) {
       z = (f.properties as any)[o.elevationPropertyKey];
       if (typeof z === "number") {
         bb.zmax = Math.max(z, bb.zmax || -Infinity);
         bb.zmin = Math.min(z, bb.zmin || Infinity);
       }
     }
-    if (o.measurePropertyKey) {
+    if (o.measurePropertyKey && (type[type.length - 1] === "Z" || type[type.length - 1] === "M")) {
       m = (f.properties as any)[o.measurePropertyKey];
       if (typeof m === "number") {
         bb.mmax = Math.max(m, bb.mmax || -Infinity);
