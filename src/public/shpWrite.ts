@@ -25,7 +25,7 @@ const shpWrite = async (geojson: FeatureCollection, type: ShapefileTypesString, 
   const writer = writers[numType as keyof typeof writers];
   if (!writer) throw new Error("Shapefile type not currently supported");
 
-  const { extents, shpLength, shxLength, filterFeatures, write } = writer;
+  const { extents, shpLength, shxLength, filterFeatures, write, dbfProps } = writer;
 
   const features = filterFeatures(geojson, o);
 
@@ -65,17 +65,7 @@ const shpWrite = async (geojson: FeatureCollection, type: ShapefileTypesString, 
 
   write(shp, shx, features, numType, o);
 
-  let props: any, prop;
-  const propList = features.map((f) => {
-    props = {};
-    Object.keys(f.properties || []).forEach((key) => {
-      prop = (f.properties as any)[key];
-      if (typeof prop !== "undefined") {
-        props[key] = prop;
-      }
-    });
-    return { ...props };
-  });
+  const propList = dbfProps(features, numType, o);
   const dbf = dbfWrite(propList);
 
   return {

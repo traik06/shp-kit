@@ -202,4 +202,23 @@ const write = (
   });
 };
 
-export { write, extents, shpLength, shxLength, filterFeatures };
+const dbfProps = (
+  features: Feature<Geometry, GeoJsonProperties>[],
+  shpTypeNumber: ShapefileTypesNumber,
+  o: Options
+) => {
+  let props: any, prop;
+  const propList = features.map((f) => {
+    props = {};
+    Object.keys(f.properties || []).forEach((key) => {
+      prop = (f.properties as any)[key];
+      if (typeof prop !== "undefined") {
+        props[key] = prop;
+      }
+    });
+    return props;
+  });
+  return propList;
+};
+
+export { write, extents, shpLength, shxLength, filterFeatures, dbfProps };
