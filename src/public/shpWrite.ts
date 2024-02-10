@@ -1,7 +1,7 @@
 import type { FeatureCollection } from "geojson";
-import createDataView from "../helpers/createDataView";
-import { ShapefileTypesString, shapefileTypeToNumberType } from "../helpers/shapefileTypes";
-import writers, { dbf as dbfWrite } from "../writers";
+import createDataView from "../private/helpers/createDataView";
+import { ShapefileTypesString, shapefileTypeToNumberType } from "../private/helpers/shapefileTypes";
+import writers, { dbf as dbfWrite } from "../private/writers";
 
 const defaultOptions = {
   bundlePolygons: true,

@@ -20,7 +20,6 @@ describe("shpRead", () => {
     );
 
     const geojson = await shpRead(shpBuffer, {}, dbfBuffer);
-    console.dir(geojson, { depth: 100 });
     expect(JSON.stringify(geojson)).toBe(targetGeoJson);
     // fs.writeFile(path.join(__dirname, "output", "001-PolyLineZ.json"), JSON.stringify(geojson), () => {});
   });

@@ -1,8 +1,8 @@
 import { Feature, FeatureCollection } from "geojson";
-import createDataView from "../helpers/createDataView";
-import toDataView from "../helpers/toDataView";
-import readers, { dbf as dbfReader } from "../readers";
-import { ShapefileTypesNumber, shapefileNumberTypeToStringType } from "../helpers/shapefileTypes";
+import createDataView from "../private/helpers/createDataView";
+import toDataView from "../private/helpers/toDataView";
+import readers, { dbf as dbfReader } from "../private/readers";
+import { ShapefileTypesNumber, shapefileNumberTypeToStringType } from "../private/helpers/shapefileTypes";
 
 const defaultOptions = {
   elevationPropertyKey: null as string | null,

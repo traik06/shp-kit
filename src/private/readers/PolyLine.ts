@@ -1,6 +1,6 @@
 import { Feature } from "geojson";
 import { ShapefileTypesNumber, ShapefileTypesString } from "../helpers/shapefileTypes";
-import { Options } from "../public/shpRead";
+import { Options } from "../../public/shpRead";
 
 const getOptionalViewFloat64 = (view: DataView, target: number, little: boolean) => {
   if (target > view.byteLength - 1) return 0;
