@@ -8,15 +8,15 @@ The following table outlines the current support for different types of shapefil
 
 | Shapefile Type | Read | Write |
 | -------------- | ---- | ----- |
-| Point          | ❌   | ✅    |
+| Point          | ✅   | ✅    |
 | PolyLine       | ✅   | ✅    |
 | Polygon        | ❌   | ❌    |
 | MultiPoint     | ❌   | ❌    |
-| PointZ         | ❌   | ✅    |
+| PointZ         | ✅   | ✅    |
 | PolyLineZ      | ✅   | ✅    |
 | PolygonZ       | ❌   | ❌    |
 | MultiPointZ    | ❌   | ❌    |
-| PointM         | ❌   | ✅    |
+| PointM         | ✅   | ✅    |
 | ⚠ PolyLineM    | ✅   | ✅    |
 | ⚠ PolygonM     | ❌   | ❌    |
 | ⚠ MultiPointM  | ❌   | ❌    |

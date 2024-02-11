@@ -48,7 +48,7 @@ const write = (
   o: Options
 ) => {
   let currByteIndex = 100;
-  let record_index = 1;
+  let record_index = 0;
   const shpType = shapefileNumberTypeToStringType(shpTypeNumber);
 
   features.forEach((feature, index) => {
@@ -117,12 +117,14 @@ const write = (
 
       const featureLength = shpType === "Point" ? 20 : shpType === "PointM" ? 28 : 36; // PointZ 44;
       // Record header
-      shpView.setInt32(currByteIndex, record_index++); // Record number
+      shpView.setInt32(currByteIndex, record_index + 1); // Record number
       shpView.setInt32(currByteIndex + 4, featureLength / 2); // Record length
 
       //Shx
-      shxView.setInt32(100 + index * 8, currByteIndex / 2); // Offset
-      shxView.setInt32(100 + index * 8 + 4, featureLength / 2); // Content length
+      shxView.setInt32(100 + record_index * 8, currByteIndex / 2); // Offset
+      shxView.setInt32(100 + record_index * 8 + 4, featureLength / 2); // Content length
+
+      record_index++;
 
       currByteIndex += featureLength + 8;
     });

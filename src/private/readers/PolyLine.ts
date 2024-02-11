@@ -1,9 +1,9 @@
 import { Feature } from "geojson";
-import { ShapefileTypesNumber, ShapefileTypesString } from "../helpers/shapefileTypes";
+import { ShapefileTypesString } from "../helpers/shapefileTypes";
 import { Options } from "../../public/shpRead";
 
-const getOptionalViewFloat64 = (view: DataView, target: number, little: boolean) => {
-  if (target > view.byteLength - 1) return 0;
+const getOptionalViewFloat64 = (view: DataView, target: number, lastValidByte: number, little: boolean) => {
+  if (target > view.byteLength - 1 || target > lastValidByte) return 0;
   return view.getFloat64(target, little);
 };
 
@@ -17,6 +17,7 @@ const PolyLine = (
     [key: string]: any;
   }
 ) => {
+  const recordEndByte = currByteIndex + recordLength;
   //significant header information
   const partsLength = shpView.getInt32(currByteIndex + 36, true);
   const pointsLength = shpView.getInt32(currByteIndex + 40, true);
@@ -43,13 +44,11 @@ const PolyLine = (
   if (shpType === "PolyLineZ") {
     currByteIndex += 16; // min-max
     zValues = [...Array(pointsLength)].map((_, i) => {
-      return getOptionalViewFloat64(shpView, currByteIndex + 8 * i, true);
-      return shpView.getFloat64(currByteIndex + 8 * i, true);
+      return getOptionalViewFloat64(shpView, currByteIndex + 8 * i, recordEndByte, true);
     });
     currByteIndex += pointsLength * 8 + 16;
     mValues = [...Array(pointsLength)].map((_, i) => {
-      return getOptionalViewFloat64(shpView, currByteIndex + 8 * i, true);
-      return shpView.getFloat64(currByteIndex + 8 * i, true);
+      return getOptionalViewFloat64(shpView, currByteIndex + 8 * i, recordEndByte, true);
     });
 
     if (!o.elevationPropertyKey) {
@@ -88,7 +87,6 @@ const PolyLine = (
         : {}),
     },
   } as Feature;
-  //   return partsSeparators;
   return output as Feature;
 };
 
