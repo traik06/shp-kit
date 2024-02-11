@@ -1,5 +1,11 @@
 # shp-kit
 
+## 0.1.6
+
+### Patch Changes
+
+- b6253f9: Added Point/M/Z read functionality
+
 ## 0.1.5
 
 ### Patch Changes
