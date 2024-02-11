@@ -1,5 +1,11 @@
 # shp-kit
 
+## 0.1.5
+
+### Patch Changes
+
+- 28ed4d1: Point/M/Z read implemented
+
 ## 0.1.4
 
 ### Patch Changes
