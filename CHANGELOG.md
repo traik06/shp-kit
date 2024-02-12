@@ -1,5 +1,11 @@
 # shp-kit
 
+## 0.2.0
+
+### Minor Changes
+
+- f1f6945: Read/Write zip files containing files required by a shapefile
+
 ## 0.1.6
 
 ### Patch Changes
