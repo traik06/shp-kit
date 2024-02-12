@@ -38,7 +38,7 @@ shpWriteZip: (
   type: "Point" | "PolyLine" | "Polygon" | "MultiPoint" | "PointZ" | "PolyLineZ" | "PolygonZ" | "MultiPointZ" | "PointM" | "PolyLineM" | "PolygonM" | "MultiPointM" | "MultiPatch", 
   options?: Partial<Options>, // See available options below
   download?: boolean, // If true, attempts to download the ZIP after generating
-  wktProjectionString?: string // If you have a shapefile *.prj compatible WKT projection string, you can include it here
+  wktProjectionString?: string // If you have a shapefile *.prj compatible WKT projection string, you can include it here. Note: your geojson should be in this projection already. Consider using reprojectGeoJson available below if you need to re-project your data.
 ) => Promise<Blob>
 ```
 
