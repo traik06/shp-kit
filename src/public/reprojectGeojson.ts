@@ -12,7 +12,7 @@ const reprojectGeoJson = (
   geojson: FeatureCollection,
   sourceProjection: string,
   targetProjection: string = "WGS84",
-  originalGeometryPropertyKey?: string
+  originalGeometryPropertyKey?: string | null
 ) => {
   const transformCoordinates = (coordinates: any[], sourceProjection: string, targetProjection: string) => {
     if (Array.isArray(coordinates[0])) {

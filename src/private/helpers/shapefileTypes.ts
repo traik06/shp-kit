@@ -15,7 +15,7 @@ const shapefileTypes = {
   31: "MultiPatch",
 } as const;
 
-type ShapefileTypesNumber = keyof typeof shapefileTypes;
+type ShapefileTypesNumber = Exclude<keyof typeof shapefileTypes, 0>;
 type ShapefileTypesString = (typeof shapefileTypes)[ShapefileTypesNumber];
 
 const shapefileTypeToNumberType = (type: (typeof shapefileTypes)[keyof typeof shapefileTypes]) => {
@@ -26,7 +26,7 @@ const shapefileTypeToNumberType = (type: (typeof shapefileTypes)[keyof typeof sh
 };
 
 const shapefileNumberTypeToStringType = (numType: keyof typeof shapefileTypes) => {
-  return shapefileTypes[numType];
+  return shapefileTypes[numType] as ShapefileTypesString;
 };
 
 export default shapefileTypes;

@@ -69,9 +69,9 @@ const shpWrite = async (geojson: FeatureCollection, type: ShapefileTypesString, 
   const dbf = dbfWrite(propList);
 
   return {
-    shp,
-    shx,
-    dbf,
+    shp: shp.buffer,
+    shx: shx.buffer,
+    dbf: dbf.buffer,
   };
 };
 

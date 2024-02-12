@@ -3,10 +3,12 @@ import createDataView from "../private/helpers/createDataView";
 import toDataView from "../private/helpers/toDataView";
 import readers, { dbf as dbfReader } from "../private/readers";
 import { ShapefileTypesNumber, shapefileNumberTypeToStringType } from "../private/helpers/shapefileTypes";
+import reprojectGeoJson from "./reprojectGeojson";
 
 const defaultOptions = {
   elevationPropertyKey: null as string | null,
   measurePropertyKey: null as string | null,
+  originalGeometryPropertyKey: null as string | null,
 };
 
 /**
@@ -44,7 +46,7 @@ const shpRead = async (
   let currByteIndex = 100;
   let currFeatureIndex = 0;
 
-  const output = {
+  let output = {
     type: "FeatureCollection",
     features: [],
   } as FeatureCollection;
@@ -71,6 +73,23 @@ const shpRead = async (
     output.features.push(feature);
     currFeatureIndex++;
     currByteIndex += recordLength;
+  }
+
+  if (prj instanceof File || prj instanceof Blob) {
+    prj = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = () => reject(new Error("Error reading Blob as text"));
+      reader.readAsText(prj as Blob);
+    });
+  } else if (prj instanceof ArrayBuffer) {
+    prj = new TextDecoder().decode(prj as ArrayBuffer);
+  } else if (Buffer.isBuffer(prj)) {
+    prj = prj.toString("utf-8");
+  }
+
+  if (prj) {
+    output = reprojectGeoJson(output, prj as string, "WGS84", o.originalGeometryPropertyKey);
   }
 
   return output;

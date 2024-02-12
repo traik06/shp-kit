@@ -29,21 +29,34 @@ Please note:
 
 ## Library Functions
 
+### shpWriteZip
+
+```typescript
+shpWriteZip: (
+  filename: string, // Shapefile name (with or without extension .zip)
+  geojson: FeatureCollection, // GeoJSON feature collection
+  type: "Point" | "PolyLine" | "Polygon" | "MultiPoint" | "PointZ" | "PolyLineZ" | "PolygonZ" | "MultiPointZ" | "PointM" | "PolyLineM" | "PolygonM" | "MultiPointM" | "MultiPatch", 
+  options?: Partial<Options>, // See available options below
+  download?: boolean, // If true, attempts to download the ZIP after generating
+  wktProjectionString?: string // If you have a shapefile *.prj compatible WKT projection string, you can include it here
+) => Promise<Blob>
+```
+
 ### shpWrite
 
 ```typescript
 shpWrite: (
     geojson: FeatureCollection, // GeoJSON feature collection
-    type: "Null Shape" | "Point" | "PolyLine" | "Polygon" | "MultiPoint" | "PointZ" | "PolyLineZ" | "PolygonZ" | "MultiPointZ" | "PointM" | "PolyLineM" | "PolygonM" | "MultiPointM" | "MultiPatch",
+    type: "Point" | "PolyLine" | "Polygon" | "MultiPoint" | "PointZ" | "PolyLineZ" | "PolygonZ" | "MultiPointZ" | "PointM" | "PolyLineM" | "PolygonM" | "MultiPointM" | "MultiPatch",
     options?: Partial<Options> // See available options below
 ) => Promise<{ // Object containing the most important files in a shapefile, objects are given as Dataviews. Use shp.buffer to do whatever you need from here
-  shp: Dataview,
-  shx: Dataview,
-  dbf: Dataview,
+  shp: ArrayBuffer,
+  shx: ArrayBuffer,
+  dbf: ArrayBuffer,
 }>
 ```
 
-The exposed options and their defaults:
+Write options and their defaults:
 
 | Key                                                     | Expected type / Default Value | Description                                                                                                                                                                                                                         |
 | ------------------------------------------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -53,21 +66,31 @@ The exposed options and their defaults:
 | measurePropertyKey                                      | string / null                 | Shapefiles support an additional numeric measure value, as denoted by shapefile types ending with `M`, if a key from feature.properties: `{[key]: value}` is given, this will be used as the `M` value in the written shapefile.    |
 
 
+### shpReadZip
+
+```typescript
+shpReadZip: (
+  file: File | Blob | ZipUrl, 
+  options?: Partial<Options> // See available options below
+  ) => Promise<FeatureCollection> // GeoJSON feature collection
+```
+
 ### shpRead
 
 ```typescript
 shpRead: (
   shp: File, // File or Blob
-  options?: Partial<Options>, // WIP
+  options?: Partial<Options> // See available options below
   dbf?: File, // optional dbase file that would populate feature properties
   prj?: File | string // optional projection file, or projection string. If present, shpRead will re-project your shapefile into WGS84, alternatively feel free to use reprojectGeojson function also available in this library
 ) => Promise<FeatureCollection> // GeoJSON feature collection
 ```
 
-| Key                   | Expected type / Default Value | Description                                                                                                                                                                                             |
-| --------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| elevationPropertyKey  | string / null                 | By default where elevation available, it will be set as 3rd element in the coordinates array, if elevationPropertyKey is set, elevation will be added to feature properties under provided key instead. |
-| measurePropertyKey    | string / null                 | if measurePropertyKey is set, and measure values available, they will be added to feature properties under provided key.                                                                                | 
+| Key                            | Expected type / Default Value | Description                                                                                                                                                                                             |
+| ------------------------------ | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| elevationPropertyKey           | string / null                 | By default where elevation available, it will be set as 3rd element in the coordinates array, if elevationPropertyKey is set, elevation will be added to feature properties under provided key instead. |
+| measurePropertyKey             | string / null                 | if measurePropertyKey is set, and measure values available, they will be added to feature properties under provided key.                                                                                |
+| originalGeometryPropertyKey    | string / null                 | Key under which you would like the original geometry to be saved. Useful when showing feature on a WGS84 map while showing feature coordinates on select/hover in another coordinate system             |
 
 
 
@@ -78,8 +101,6 @@ reprojectGeoJson: (
   geojson: FeatureCollection, // GeoJSON feature collection
   sourceProjection: string, // Can be either PROJ.4 string or WKT string, such as you find in the *.prj file with your shapefile (if provided)
   targetProjection: string, // Can be either PROJ.4 string or WKT string, such as you find in the *.prj file with your shapefile (if provided)
-  originalGeometryPropertyKey?: string // Key under which you would like the original geometry to be saved. Useful when showing on a WGS84 map while showing coordinates in state-plane or local space
+  originalGeometryPropertyKey?: string // Key under which you would like the original geometry to be saved. Useful when showing feature on a WGS84 map while showing feature coordinates on select/hover in another coordinate system
 ) => FeatureCollection // GeoJSON feature collection
 ```
-
-This function is still under development and will be implemented in the future.

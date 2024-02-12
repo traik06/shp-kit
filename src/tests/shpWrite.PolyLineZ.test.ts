@@ -18,9 +18,9 @@ describe("shpWrite", () => {
     // fs.writeFile(path.join(__dirname, "output", "001-PolyLineZ.shx"), shx, () => {});
     // fs.writeFile(path.join(__dirname, "output", "001-PolyLineZ.dbf"), dbf, () => {});
 
-    expect(buffEqual("001-PolyLineZ.shp", shpBuffer, shp.buffer)).toBe(true);
-    expect(buffEqual("001-PolyLineZ.shx", shxBuffer, shx.buffer)).toBe(true);
-    expect(buffEqual("001-PolyLineZ.dbf", dbfBuffer, dbf.buffer, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
+    expect(buffEqual("001-PolyLineZ.shp", shpBuffer, shp)).toBe(true);
+    expect(buffEqual("001-PolyLineZ.shx", shxBuffer, shx)).toBe(true);
+    expect(buffEqual("001-PolyLineZ.dbf", dbfBuffer, dbf, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
   });
 
   it("PolyLineZ.002 - MultiLineString, default options", async () => {
@@ -36,9 +36,9 @@ describe("shpWrite", () => {
     // fs.writeFile(path.join(__dirname, "output", "002-PolyLineZ.shx"), shx, () => {});
     // fs.writeFile(path.join(__dirname, "output", "002-PolyLineZ.dbf"), dbf, () => {});
 
-    expect(buffEqual("002-PolyLineZ.shp", shpBuffer, shp.buffer)).toBe(true);
-    expect(buffEqual("002-PolyLineZ.shx", shxBuffer, shx.buffer)).toBe(true);
-    expect(buffEqual("002-PolyLineZ.dbf", dbfBuffer, dbf.buffer, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
+    expect(buffEqual("002-PolyLineZ.shp", shpBuffer, shp)).toBe(true);
+    expect(buffEqual("002-PolyLineZ.shx", shxBuffer, shx)).toBe(true);
+    expect(buffEqual("002-PolyLineZ.dbf", dbfBuffer, dbf, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
   });
 
   it("PolyLineZ.003 - MultiLineString, elevation from feature property", async () => {
@@ -56,11 +56,9 @@ describe("shpWrite", () => {
     // fs.writeFile(path.join(__dirname, "output", "003-PolyLineZ.shx"), shx, () => {});
     // fs.writeFile(path.join(__dirname, "output", "003-PolyLineZ.dbf"), dbf, () => {});
 
-    expect(buffEqual("003-PolyLineZ.shp", shpBuffer, shp.buffer, [73, 74, 81, 82, 22261, 22262, 22269, 22270])).toBe(
-      true
-    );
-    expect(buffEqual("003-PolyLineZ.shx", shxBuffer, shx.buffer)).toBe(true);
-    expect(buffEqual("003-PolyLineZ.dbf", dbfBuffer, dbf.buffer, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
+    expect(buffEqual("003-PolyLineZ.shp", shpBuffer, shp, [73, 74, 81, 82, 22261, 22262, 22269, 22270])).toBe(true);
+    expect(buffEqual("003-PolyLineZ.shx", shxBuffer, shx)).toBe(true);
+    expect(buffEqual("003-PolyLineZ.dbf", dbfBuffer, dbf, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
   });
 
   it("PolyLineZ.004 - MultiLineString, elevation array from feature properties", async () => {
@@ -76,8 +74,8 @@ describe("shpWrite", () => {
     // fs.writeFile(path.join(__dirname, "output", "004-PolyLineZ.shx"), shx, () => {});
     // fs.writeFile(path.join(__dirname, "output", "004-PolyLineZ.dbf"), dbf, () => {});
 
-    expect(buffEqual("004-PolyLineZ.shp", shpBuffer, shp.buffer)).toBe(true);
-    expect(buffEqual("004-PolyLineZ.shx", shxBuffer, shx.buffer)).toBe(true);
-    expect(buffEqual("004-PolyLineZ.dbf", dbfBuffer, dbf.buffer, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
+    expect(buffEqual("004-PolyLineZ.shp", shpBuffer, shp)).toBe(true);
+    expect(buffEqual("004-PolyLineZ.shx", shxBuffer, shx)).toBe(true);
+    expect(buffEqual("004-PolyLineZ.dbf", dbfBuffer, dbf, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
   });
 });

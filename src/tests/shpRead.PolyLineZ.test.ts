@@ -23,4 +23,26 @@ describe("shpRead", () => {
     expect(JSON.stringify(geojson)).toBe(targetGeoJson);
     // fs.writeFile(path.join(__dirname, "output", "001-PolyLineZ.json"), JSON.stringify(geojson), () => {});
   });
+  it("PolyLineZ.002 - Simple 3D arrow with projection", async () => {
+    const targetGeoJson = fs.readFileSync(
+      path.join(__dirname, "test_results", "read", "PolyLineZ", "002-PolyLineZ.json"),
+      {
+        encoding: "UTF-8",
+      }
+    );
+
+    const shpBuffer = fs.readFileSync(
+      path.join(__dirname, "assets", "statue_of_liberty_arrow_polylineZ", "ARR-3D.shp")
+    );
+    const dbfBuffer = fs.readFileSync(
+      path.join(__dirname, "assets", "statue_of_liberty_arrow_polylineZ", "ARR-3D.dbf")
+    );
+    const prjBuffer = fs.readFileSync(
+      path.join(__dirname, "assets", "statue_of_liberty_arrow_polylineZ", "ARR-3D.prj")
+    );
+
+    const geojson = await shpRead(shpBuffer, {}, dbfBuffer, prjBuffer);
+    expect(JSON.stringify(geojson)).toBe(targetGeoJson);
+    // fs.writeFile(path.join(__dirname, "output", "002-PolyLineZ.json"), JSON.stringify(geojson), () => {});
+  });
 });

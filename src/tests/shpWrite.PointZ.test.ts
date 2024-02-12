@@ -20,9 +20,9 @@ describe("shpWrite", () => {
     // fs.writeFile(path.join(__dirname, "output", "001-PointZ.shx"), shx, () => {});
     // fs.writeFile(path.join(__dirname, "output", "001-PointZ.dbf"), dbf, () => {});
 
-    expect(buffEqual("001-PointZ.shp", shpBuffer, shp.buffer)).toBe(true);
-    expect(buffEqual("001-PointZ.shx", shxBuffer, shx.buffer)).toBe(true);
-    expect(buffEqual("001-PointZ.dbf", dbfBuffer, dbf.buffer, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
+    expect(buffEqual("001-PointZ.shp", shpBuffer, shp)).toBe(true);
+    expect(buffEqual("001-PointZ.shx", shxBuffer, shx)).toBe(true);
+    expect(buffEqual("001-PointZ.dbf", dbfBuffer, dbf, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
   });
 
   it("PointZ.002 - Airports of the USA, Elevation from property", async () => {
@@ -42,9 +42,9 @@ describe("shpWrite", () => {
     // fs.writeFile(path.join(__dirname, "output", "002-PointZ.shx"), shx, () => {});
     // fs.writeFile(path.join(__dirname, "output", "002-PointZ.dbf"), dbf, () => {});
 
-    expect(buffEqual("002-PointZ.shp", shpBuffer, shp.buffer)).toBe(true);
-    expect(buffEqual("002-PointZ.shx", shxBuffer, shx.buffer)).toBe(true);
-    expect(buffEqual("002-PointZ.dbf", dbfBuffer, dbf.buffer, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
+    expect(buffEqual("002-PointZ.shp", shpBuffer, shp)).toBe(true);
+    expect(buffEqual("002-PointZ.shx", shxBuffer, shx)).toBe(true);
+    expect(buffEqual("002-PointZ.dbf", dbfBuffer, dbf, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
   });
 
   it("PointZ.003 - Airports of the USA from MultiPoint Features, Elevation from coordinates", async () => {
@@ -65,8 +65,8 @@ describe("shpWrite", () => {
     // fs.writeFile(path.join(__dirname, "output", "003-PointZ.shx"), shx, () => {});
     // fs.writeFile(path.join(__dirname, "output", "003-PointZ.dbf"), dbf, () => {});
 
-    expect(buffEqual("003-PointZ.shp", shpBuffer, shp.buffer)).toBe(true);
-    expect(buffEqual("003-PointZ.shx", shxBuffer, shx.buffer)).toBe(true);
-    expect(buffEqual("003-PointZ.dbf", dbfBuffer, dbf.buffer, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
+    expect(buffEqual("003-PointZ.shp", shpBuffer, shp)).toBe(true);
+    expect(buffEqual("003-PointZ.shx", shxBuffer, shx)).toBe(true);
+    expect(buffEqual("003-PointZ.dbf", dbfBuffer, dbf, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
   });
 });

@@ -20,9 +20,9 @@ describe("shpWrite", () => {
     // fs.writeFile(path.join(__dirname, "output", "001-Point.shx"), shx, () => {});
     // fs.writeFile(path.join(__dirname, "output", "001-Point.dbf"), dbf, () => {});
 
-    expect(buffEqual("001-Point.shp", shpBuffer, shp.buffer)).toBe(true);
-    expect(buffEqual("001-Point.shx", shxBuffer, shx.buffer)).toBe(true);
-    expect(buffEqual("001-Point.dbf", dbfBuffer, dbf.buffer, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
+    expect(buffEqual("001-Point.shp", shpBuffer, shp)).toBe(true);
+    expect(buffEqual("001-Point.shx", shxBuffer, shx)).toBe(true);
+    expect(buffEqual("001-Point.dbf", dbfBuffer, dbf, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
   });
 
   it("Point.002 - Airports of the USA from MultiPoint Features", async () => {
@@ -43,8 +43,8 @@ describe("shpWrite", () => {
     // fs.writeFile(path.join(__dirname, "output", "002-Point.shx"), shx, () => {});
     // fs.writeFile(path.join(__dirname, "output", "002-Point.dbf"), dbf, () => {});
 
-    expect(buffEqual("002-Point.shp", shpBuffer, shp.buffer)).toBe(true);
-    expect(buffEqual("002-Point.shx", shxBuffer, shx.buffer)).toBe(true);
-    expect(buffEqual("002-Point.dbf", dbfBuffer, dbf.buffer, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
+    expect(buffEqual("002-Point.shp", shpBuffer, shp)).toBe(true);
+    expect(buffEqual("002-Point.shx", shxBuffer, shx)).toBe(true);
+    expect(buffEqual("002-Point.dbf", dbfBuffer, dbf, [1, 2, 3])).toBe(true); // [1,2,3] Indexes of current date, 1. Year -1900, 2. Month index (Starting at 1 for January), 3. Day of month
   });
 });
