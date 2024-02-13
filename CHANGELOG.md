@@ -1,5 +1,11 @@
 # shp-kit
 
+## 0.2.1
+
+### Patch Changes
+
+- e207d97: Fixed exposed functions
+
 ## 0.2.0
 
 ### Minor Changes
