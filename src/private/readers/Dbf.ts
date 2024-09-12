@@ -1,4 +1,5 @@
 import toDataView from "../helpers/toDataView";
+import { Buffer } from "buffer";
 
 type FieldMeta = {
   field_name: string;

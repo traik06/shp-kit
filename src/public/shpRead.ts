@@ -4,6 +4,7 @@ import toDataView from "../private/helpers/toDataView";
 import readers, { dbf as dbfReader } from "../private/readers";
 import { ShapefileTypesNumber, shapefileNumberTypeToStringType } from "../private/helpers/shapefileTypes";
 import reprojectGeoJson from "./reprojectGeojson";
+import { Buffer } from "buffer";
 
 const defaultOptions = {
   elevationPropertyKey: null as string | null,
@@ -27,14 +28,19 @@ const shpRead = async (
 ) => {
   const o = { ...defaultOptions, ...(options ? { options } : {}) };
   const shpView = await toDataView(shp);
-  const prjView = prj && typeof prj !== "string" ? await toDataView(prj) : null;
+  // const prjView = prj && typeof prj !== "string" ? await toDataView(prj) : null;
 
-  const prjString =
-    typeof prj === "string"
-      ? prj
-      : typeof prj !== "undefined" && prjView
-      ? Buffer.from(prjView?.buffer.slice(0, prjView.buffer.byteLength)).toString("utf-8")
-      : null;
+  // const prjString =
+  //   typeof prj === "string"
+  //     ? prj
+  //     : typeof prj !== "undefined" && prjView
+  //     ? // ? Buffer.from(prjView?.buffer.slice(0, prjView.buffer.byteLength)).toString("utf-8")
+  //       (() => {
+  //         const decoder = new TextDecoder("utf-8");
+  //         const decodedString = decoder.decode(prjView?.buffer.slice(0, prjView.buffer.byteLength));
+  //         return decodedString;
+  //       })()
+  //     : null;
 
   const dbfProps = dbf ? await dbfReader(dbf) : null;
 
