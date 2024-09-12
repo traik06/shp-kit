@@ -1,5 +1,11 @@
 # shp-kit
 
+## 0.2.2
+
+### Patch Changes
+
+- bb084b5: replaced Node Buffer for browser compatible buffer
+
 ## 0.2.1
 
 ### Patch Changes
