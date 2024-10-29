@@ -1,5 +1,11 @@
 # shp-kit
 
+## 0.2.3
+
+### Patch Changes
+
+- 8007511: Bugfix, raw geometry option
+
 ## 0.2.2
 
 ### Patch Changes
