@@ -26,7 +26,7 @@ const shpRead = async (
   dbf?: File | Blob | ArrayBuffer | Buffer,
   prj?: File | Blob | ArrayBuffer | Buffer | string
 ) => {
-  const o = { ...defaultOptions, ...(options ? { options } : {}) };
+  const o = { ...defaultOptions, ...(options ? options : {}) };
   const shpView = await toDataView(shp);
   // const prjView = prj && typeof prj !== "string" ? await toDataView(prj) : null;
 
@@ -48,7 +48,7 @@ const shpRead = async (
 
   const shpNumType = shpView.getInt32(32, true) as ShapefileTypesNumber;
   //   const shpType = shapefileNumberTypeToStringType(shpNumType);
-  o;
+
   let currByteIndex = 100;
   let currFeatureIndex = 0;
 
