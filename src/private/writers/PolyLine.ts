@@ -11,9 +11,7 @@ const extents = boundingBoxFromFeaturesList;
 const filterFeatures = (geojson: FeatureCollection, o: Options) => {
   const features = breakGeometryCollectionsFromFeatureList(geojson.features).filter((f) => {
     return (
-      f.geometry.type === "LineString" ||
       (o.bundlePolygons && f.geometry.type === "Polygon") ||
-      (o.bundleMultiTypes && f.geometry.type === "MultiLineString") ||
       (o.bundleMultiTypes && o.bundlePolygons && f.geometry.type === "MultiPolygon")
     );
   });
@@ -122,7 +120,7 @@ const write = (
     // PolyLineM end
 
     // PolyLineZ start
-    if (shapefileNumberTypeToStringType(shpTypeNumber) === "PolyLineZ") {
+    if (shapefileNumberTypeToStringType(shpTypeNumber) === "PolygonZ") {
       shpView.setFloat64(currByteIndex + featureByteIndex + 0, bb.zmin || 0, true);
       shpView.setFloat64(currByteIndex + featureByteIndex + 8, bb.zmax || 0, true);
 

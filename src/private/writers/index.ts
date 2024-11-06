@@ -9,7 +9,7 @@ const writers = {
   // 8: "MultiPoint",
   11: PointWriter,
   13: PolyLineWriter, //"PolyLineZ",
-  // 15: "PolygonZ",
+  15: PolyLineWriter,
   // 18: "MultiPointZ",
   21: PointWriter,
   23: PolyLineWriter, //"PolyLineM",
